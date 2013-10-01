@@ -1,0 +1,30 @@
+---
+- name: Update Cache
+  apt: update_cache=yes
+
+- name: Upgrade Python
+  apt: name=python state=latest
+
+- name: Install Python Dev Libraries
+  apt: name=python-dev state=latest
+
+- name: Install setuptools
+  apt: name=python-setuptools
+
+- name: Install setuptools x 2
+  apt: name=python-distutils-extra
+
+
+- name: Install Pip
+  easy_install: name=pip
+
+- name: Upgrade Distribute
+  pip: name=distribute state=latest
+
+- name: Install Virtualenv
+  pip: name=virtualenv
+
+- name: Install Pip Requirements File
+  pip: requirements=/vagrant/python/requirements.txt virtualenv=/home/vagrant/python_env
+
+

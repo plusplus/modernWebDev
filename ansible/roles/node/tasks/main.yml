@@ -1,0 +1,22 @@
+---
+- name: node | create build dir
+  file: path=/build state=directory owner=vagrant
+
+- name: node | install build dependencies
+  command: sudo apt-get build-dep nodejs -y
+
+- name: node | download node v{{node_version}}
+  get_url: url=http://nodejs.org/dist/v{{node_version}}/node-v{{node_version}}.tar.gz
+           dest=/build/node-v{{node_version}}.tar.gz
+
+- name: node | extract node v{{node_version}}
+  command: tar -xvzf node-v{{node_version}}.tar.gz chdir=/build creates=/build/node-v{{node_version}}
+
+- name: node | configure node v{{node_version}}
+  command: ./configure chdir=/build/node-v{{node_version}} creates=/usr/local/bin/node
+
+- name: node | build node v{{node_version}}
+  command: make chdir=/build/node-v{{node_version}} creates=/usr/local/bin/node
+
+- name: node | install node v{{node_version}}
+  command: make install chdir=/build/node-v{{node_version}} creates=/usr/local/bin/node

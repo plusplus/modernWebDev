@@ -1,0 +1,12 @@
+---
+- hosts: all
+  sudo: true
+  roles:
+    - node
+    - ruby
+    - python
+
+  vars:
+    - rbenv_root: /usr/local/rbenv
+    - ruby_version: 1.9.3-p385
+    - node_version: 0.10.19
