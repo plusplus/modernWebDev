@@ -5,11 +5,12 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "preciseRapidDev"
-  config.vm.box_url = "package.box"
+  config.vm.box = "precise32"
+  config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
   config.vm.network :forwarded_port, guest: 8000, host: 8080
 
+  config.vm.provision "shell", inline: "apt-get update"
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"
     ansible.verbose = true
