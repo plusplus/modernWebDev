@@ -18,6 +18,8 @@
     - libxslt1-dev
     - zlib1g-dev
     - libyaml-dev
+    - sqlite3
+    - libsqlite3-dev
 
 - name: rbenv | update rbenv repo
   git: repo=git://github.com/sstephenson/rbenv.git dest=$rbenv_root version=v0.4.0
