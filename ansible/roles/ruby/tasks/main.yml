@@ -40,15 +40,15 @@
 
 - name: rbenv | install ruby $ruby_version
   shell: RBENV_ROOT=${rbenv_root} rbenv install $ruby_version
-  when_failed: $ruby_installed
+  when: ruby_installed|failed
 
 - name: rbenv | set global ruby $ruby_version
   shell: RBENV_ROOT=${rbenv_root} rbenv global $ruby_version
-  when_failed: $ruby_installed
+  when: ruby_installed|failed
 
 - name: rbenv | rehash
   shell: RBENV_ROOT=${rbenv_root} rbenv rehash
-  when_failed: $ruby_installed
+  when: ruby_installed|failed
 
 # - name: rbenv | set gemrc
 #   copy: src=files/gemrc dest=/root/.gemrc owner=root group=root mode=0644

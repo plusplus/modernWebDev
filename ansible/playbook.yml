@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  sudo: true
   roles:
     - node
     - ruby

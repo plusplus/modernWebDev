@@ -10,9 +10,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :forwarded_port, guest: 8000, host: 8080
 
-  config.vm.provision "shell", inline: "apt-get update"
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "ansible/playbook.yml"
-    ansible.verbose = true
-  end
+  config.vm.provision "shell", path: "ansible/bootstrap.sh"
 end
