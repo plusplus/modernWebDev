@@ -1,0 +1,5 @@
+- name: sqlite - Install package
+  apt: name=sqlite state=latest
+
+- name: sqlite - Install dev libraries
+  apt: name=libsqlite3-dev state=latest

@@ -1,11 +1,16 @@
 ---
 - hosts: all
   roles:
+    - sqlite
     - node
-    - ruby
     - python
+    - ruby-install
+    - chruby
+    - ruby
 
   vars:
     - rbenv_root: /usr/local/rbenv
-    - ruby_version: 1.9.3-p385
+    - ruby_version: 1.9.3-p448
     - node_version: 0.10.19
+    - chruby_version: 0.3.7
+    - ruby_install_version: 0.3.0

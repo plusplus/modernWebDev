@@ -1,0 +1,15 @@
+- name: ruby-install | create build dir
+  file: path=/build state=directory owner=vagrant
+
+- name: chruby | make
+  apt: name=make state=latest
+
+- name: ruby-install | download ruby-install
+  get_url: url=https://github.com/postmodern/ruby-install/archive/v{{ruby_install_version}}.tar.gz
+           dest=/build/ruby-install-{{ruby_install_version}}.tar.gz
+
+- name: ruby-install | extract nruby-install
+  command: tar -xvzf ruby-install-{{ruby_install_version}}.tar.gz chdir=/build creates=/build/ruby-install-{{ruby_install_version}}
+
+- name: ruby-install | install
+  command: sudo make install chdir=/build/ruby-install-{{ruby_install_version}} creates=/usr/local/bin/ruby-install

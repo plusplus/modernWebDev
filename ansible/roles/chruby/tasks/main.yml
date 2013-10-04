@@ -1,0 +1,21 @@
+- name: chruby | create build dir
+  file: path=/build state=directory owner=vagrant
+
+- name: chruby | make
+  apt: name=make state=latest
+
+- name: chruby | download {{chruby_version}}
+  get_url: url=https://github.com/postmodern/chruby/archive/v{{chruby_version}}.tar.gz
+           dest=/build/chruby-{{chruby_version}}.tar.gz
+
+- name: chruby | extract
+  command: tar -xvzf chruby-{{chruby_version}}.tar.gz chdir=/build creates=/build/chruby-{{chruby_version}}
+
+- name: ruby-install | install
+  command: sudo make install chdir=/build/chruby-{{chruby_version}} creates=/usr/local/share/chruby/chruby.shs
+
+- name: ruby-install | setup profile
+  copy: src=chruby.sh dest=/etc/profile.d/chruby.sh owner=root group=root mode=0644
+
+- name: setup autoselect
+  lineinfile: dest=/home/vagrant/.bashrc regexp=auto.sh line="source /usr/local/share/chruby/auto.sh"
