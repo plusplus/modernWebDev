@@ -1,8 +1,9 @@
-Django==1.5.4
+Django==1.7.1
 Markdown==2.3.1
-PIL==1.1.7
+Pillow==2.3.0
 Pygments==1.6
-South==0.8.2
 argparse==1.2.1
+braintree==3.6.0
 pytz==2013b
+requests==2.4.3
 wsgiref==0.1.2
